@@ -1,0 +1,8 @@
+# Virtual Environment
+brain_tumor_env/
+venv/
+.env/
+
+# Python cache
+__pycache__/
+*.pyc

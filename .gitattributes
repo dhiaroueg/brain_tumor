@@ -1,1 +1,9 @@
+seg/model_x81_dcs65.h5 filter=lfs diff=lfs merge=lfs -text
 demo.mp4 filter=lfs diff=lfs merge=lfs -text
+*.h5 filter=lfs diff=lfs merge=lfs -text
+*.mp4 filter=lfs diff=lfs merge=lfs -text
+*.dll filter=lfs diff=lfs merge=lfs -text
+*.pyd filter=lfs diff=lfs merge=lfs -text
+brain_tumor_env/
+brain_tumor_env/Lib/site-packages/**/*.dll filter=lfs diff=lfs merge=lfs -text
+brain_tumor_env/Lib/site-packages/**/*.pyd filter=lfs diff=lfs merge=lfs -text

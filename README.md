@@ -1,124 +1,256 @@
-# Brain Tumor Classification & Segmentation
+🧠 Brain Tumor Analysis System
+Système complet d'analyse des tumeurs cérébrales utilisant l'intelligence artificielle pour la segmentation 3D et la classification d'images médicales.
 
-Ce projet contient deux scripts principaux :
+📋 Table des Matières
+Aperçu du Projet
 
-Classification d’images IRM
+Fonctionnalités
 
-Segmentation de volumes IRM
+Architecture du Projet
 
-Les deux utilisent une interface graphique pour sélectionner les données et afficher les résultats.
+Prérequis
 
-## Prérequis
+Installation
 
-Installe Python 3.10 via conda pour éviter les incompatibilités :
+Utilisation
 
-conda create -n tf310 python=3.10
-conda activate tf310
-pip install tensorflow keras nibabel opencv-python matplotlib
+Structure des Fichiers
 
-1) Classification des tumeurs cérébrales
+Modèles d'IA
 
-Ce script ouvre une interface graphique qui te permet :
+Avertissements
 
-de choisir une image IRM
+🎯 Aperçu du Projet
+Ce projet est une application web interactive développée avec Streamlit qui permet aux professionnels de santé d'analyser des images médicales cérébrales. Le système combine deux approches d'IA :
 
-de classer l’image
+Segmentation 3D : Analyse de volumes complets d'IRM (.nii) pour délimiter les différentes régions tumorales
 
-d’afficher la classe de tumeur prédite
+Classification : Identification du type de tumeur à partir d'images 2D d'IRM
 
-Exécution :
+✨ Fonctionnalités
+🧬 Segmentation 3D
+Chargement de fichiers NIfTI (FLAIR et T1CE)
 
-cd classification
-python classification.py
+Segmentation multi-classes (nécrose, œdème, zone renforcée)
 
-Dataset conseillé pour la classification
+Calcul automatique des mesures physiques :
 
-📌 Brain Tumor MRI Dataset (4 classes)
-Ce dataset contient des milliers d’images MRI classées en :
+Surface tumorale (mm²)
 
-Glioma
+Périmètre (mm)
 
-Meningioma
+Densité tumorale
 
-Pituitary Tumor
+Visualisation interactive des coupes
 
-No Tumor
-Téléchargement et description :
-https://www.kaggle.com/datasets/sartajbhuvaji/brain-tumor-classification-mri
+Export des résultats en PNG et CSV
 
+🔍 Classification
+Support des formats PNG, JPG, JPEG
 
-👉 Organise les images par dossier de classe pour l’entraînement.
+Classification en 4 catégories :
 
-2) Segmentation des tumeurs cérébrales
+Gliome
 
-Ce script ouvre une interface graphique pour :
+Méningiome
 
-sélectionner deux fichiers .nii :
+Tumeur pituitaire
 
-FLAIR
+Aucune tumeur
 
-T1CE
+Scores de confiance détaillés
 
-lancer la segmentation
+Génération de rapports médicaux
 
-afficher le résultat avec :
+Mode démonstration intégré
 
-surface en mm²
+👤 Interface Patient
+Formulaire d'enregistrement patient complet
 
-périmètre en mm
+Stockage des informations médicales
 
-densité tumorale (ratio)
+Interface intuitive et responsive
 
-Exécution :
+🏗️ Architecture du Projet
+text
+BRAIN8_TUMOR
+├── app.py                    # Application principale
+├── pages/
+│   ├── Sgmentation.py  # Page de segmentation
+│   └── Classification.py # Page de classification
+├── models/                   # Modèles d'IA pré-entraînés
+│   ├── model_x81_dcs65.h5   # Modèle de segmentation
+│   └── effnet.h5            # Modèle de classification
+├── utils/                    # Fonctions utilitaires
+│   └── helpers.py
+├── data/                     # Données patients (généré)
+├── assets/                   # Ressources statiques
+├── requirements.txt          # Dépendances Python
+└── README.md                 # Ce fichier
+⚙️ Prérequis
+Python 3.8 ou 3.9
 
-cd seg
-python testmodel.py
+8GB RAM minimum (16GB recommandé)
 
-Dataset conseillé pour la segmentation
+5GB d'espace disque libre
 
-📌 Multimodal Brain Tumor Segmentation Challenge – BraTS 2020
-Contient des volumes IRM multimodaux avec annotations (FLAIR, T1, T1CE, T2 et segmentations).
-Pour y accéder, il faut s’inscrire et télécharger les données via le portail officiel :
-https://www.kaggle.com/datasets/awsaf49/brats20-dataset-training-validation
+Connexion internet pour l'installation
 
-Ce dataset est un standard de la recherche en segmentation IRM.
+🚀 Installation
+Cloner ou télécharger le projet
 
-Structure du projet
-project/
-│
-├─ classification/
-│   ├─ classification.py
-│   └─ effnet.h5
-│
-├─ seg/
-│   ├─ testmodel.py
-│   └─ model_x81_dcs65.h5.h5
-│
-└─ README.md
+bash
+git clone https://github.com/mohemed-amine-gharbi/brain_tumor
+cd BRAIN8_TUMOR
+Créer un environnement virtuel
 
-Notes utiles
-Sur les mesures physiques
+bash
+# Avec conda (recommandé pour Windows)
+conda create -n brain_tumor python=3.9 -y
+conda activate brain_tumor
 
-Pour la segmentation, les mesures sont calculées en unités physiques (millimètres / millimètres carrés) en utilisant les informations du header NIfTI, ce qui est conforme aux standards médicaux. Cela élimine l’arbitraire des pixels et donne des valeurs exploitables cliniquement.
+# Avec venv (Linux/Mac)
+python -m venv brain_tumor_env
+source brain_tumor_env/bin/activate  # Linux/Mac
+# Ou
+brain_tumor_env\Scripts\activate  # Windows
+Installer les dépendances
 
-Dépendances Python
+bash
+pip install --upgrade pip
+pip install -r requirements.txt
 
-tensorflow
+💻 Utilisation
+Lancer l'application
+bash
+# Naviguer vers le dossier du projet
+cd BRAIN8_TUMOR
 
-keras
+# Lancer Streamlit
+streamlit run app.py
+L'application sera accessible à l'adresse : http://localhost:8501
 
-nibabel
+Interface Utilisateur
+Page d'accueil (app.py) :
 
-opencv-python
+Remplir le formulaire patient
 
-matplotlib
+Choisir entre segmentation ou classification
 
-tkinter (inclus avec Python)
+Segmentation 3D (pages/Segmentation.py) :
 
-Conseils de bonnes pratiques
+text
+Étapes :
+1. Télécharger fichier FLAIR (.nii)
+2. Télécharger fichier T1CE (.nii)
+3. Cliquer sur "Lancer la segmentation"
+4. Visualiser les résultats
+5. Exporter les mesures
+Classification (pages/2_📷_Classification.py) :
 
-Organise tes datasets dans des dossiers clairs (train, test, etc.)
+text
+Étapes :
+1. Télécharger une image d'IRM (.png, .jpg, .jpeg)
+2. Cliquer sur "Analyser l'image"
+3. Consulter les résultats
+4. Télécharger le rapport
 
-Vérifie la résolution des volumes .nii (via header.get_zooms())
+📁 Structure des Fichiers
+Fichiers Principaux
+Fichier	Description
+app.py	Application principale avec formulaire patient
+pages/Segmentation.py	Segmentation 3D des volumes NIfTI
+pages/Classification.py	Classification des images 2D
+requirements.txt	Liste des dépendances Python
+Dossiers
+Dossier	Contenu
+models/	Modèles d'IA pré-entraînés
+data/	Données patients (auto-généré)
+utils/	Fonctions utilitaires
+🤖 Modèles d'IA
+Modèle de Segmentation
+Format : .h5 (Keras)
 
-Utilise les résultats de segmentation pour analyser les caractéristiques tumorales quantitatives (surface, forme, distribution)
+Architecture : U-Net ou similaire
+
+Entrée : 128×128×2 (FLAIR + T1CE)
+
+Sortie : 3 classes (nécrose, œdème, renforcée)
+
+Performance : Dice coefficient ≈ 0.81
+
+Modèle de Classification
+Format : .h5 (Keras)
+
+Architecture : EfficientNetB0
+
+Entrée : 150×150×3 (RGB)
+
+Sortie : 4 classes
+
+Accuracy : > 90% (sur données test)
+
+📚 Données d’Entraînement des Modèles
+🧬 Données d’Entraînement – Segmentation 3D
+
+Le modèle de segmentation 3D a été entraîné à l’aide du jeu de données BraTS (Brain Tumor Segmentation), qui contient des volumes IRM avec annotations multi-classes pour les différentes régions tumorales.
+
+Dataset utilisé :
+🔗 https://www.kaggle.com/datasets/awsaf49/brats20-dataset-training-validation
+
+Description :
+
+Modalités d’IRM : FLAIR, T1, T1CE, T2
+
+Anatomie annotée en plusieurs classes (nécrose, œdème, zone active, etc.)
+
+Format : volumes NIfTI (.nii/.nii.gz)
+
+Standard de référence pour l’entraînement de modèles de segmentation 3D
+
+🔍 Données d’Entraînement – Classification 2D
+
+Le modèle de classification est entraîné sur un jeu d’images IRM étiquetées en différentes catégories de tumeurs cérébrales.
+
+Dataset utilisé :
+🔗 https://www.kaggle.com/datasets/sartajbhuvaji/brain-tumor-classification-mri
+
+Classes :
+
+Gliome
+
+Méningiome
+
+Tumeur pituitaire
+
+Pas de tumeur
+
+Format : images 2D (.jpg, .png, .jpeg)
+
+📝 Notes additionnelles
+
+Les datasets sont utilisés à des fins de recherche et d’entraînement uniquement.
+
+Veuillez consulter les licences sur les plateformes respectives (Kaggle) avant de redistribuer les données.
+📊 Données de Test
+Fichiers NIfTI de démonstration
+Pour tester la segmentation, vous pouvez utiliser des données publiques :
+
+BraTS Dataset : https://www.med.upenn.edu/cbica/brats/
+
+Sample NIfTI : Utiliser des données d'entraînement du challenge BraTS
+
+Images de test pour la classification
+Des exemples d'images sont disponibles dans :
+
+Kaggle Brain Tumor Dataset : https://www.kaggle.com/datasets/masoudnickparvar/brain-tumor-mri-dataset
+
+Figshare : Rechercher "brain tumor MRI dataset"
+
+⚠️ Avertissements
+
+Ce système est destiné à un usage de recherche et démonstration.
+
+Les résultats ne doivent pas être utilisés pour un diagnostic médical officiel.
+
+Toujours consulter un professionnel de santé qualifié pour l’interprétation clinique.
