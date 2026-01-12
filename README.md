@@ -121,7 +121,11 @@ pip install --upgrade pip
 pip install -r requirements.txt
 
 💻 Utilisation
-Lancer l'application
+* Lancer l'application en ligne : https://bt-app.streamlit.app/   ✅
+
+  
+* Ou bien localement :
+
 bash
 # Naviguer vers le dossier du projet
 cd BRAIN8_TUMOR
